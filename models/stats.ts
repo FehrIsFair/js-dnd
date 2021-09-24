@@ -91,6 +91,7 @@ export default class Stats {
         } else {
           console.error("Invalid values")
         }
+        break
       case 'dex':
         statCheck = this.dex + updateValue
         if (statCheck > this.dexLimit && is_magic_enhanced) {
@@ -111,6 +112,7 @@ export default class Stats {
         } else {
           console.error("Invalid values")
         }
+        break
       case 'con':
         statCheck = this.con + updateValue
         if (statCheck > this.conLimit && is_magic_enhanced) {
@@ -131,6 +133,7 @@ export default class Stats {
         } else {
           console.error("Invalid values")
         }
+        break
       case 'int':
         statCheck = this.int + updateValue
         if (statCheck > this.intLimit && is_magic_enhanced) {
@@ -151,6 +154,7 @@ export default class Stats {
         } else {
           console.error("Invalid values")
         }
+        break
       case 'wis':
         statCheck = this.wis + updateValue
         if (statCheck > this.wisLimit && is_magic_enhanced) {
@@ -171,28 +175,31 @@ export default class Stats {
         } else {
           console.error("Invalid values")
         }
+        break
       case 'cha':
-      statCheck = this.cha + updateValue
-      if (statCheck > this.chaLimit && is_magic_enhanced) {
-        if (statCheck > 30) {
-          console.error("Tried to make a stat bigger than 30")
-        } else {
+        statCheck = this.cha + updateValue
+        if (statCheck > this.chaLimit && is_magic_enhanced) {
+          if (statCheck > 30) {
+            console.error("Tried to make a stat bigger than 30")
+          } else {
+            this.cha = statCheck
+            this.chaLimit += 2
+            this.chaMod = this.determineModifiers(statCheck)
+          }
+        } else if (statCheck < 20 && is_magic_enhanced) {
           this.cha = statCheck
-          this.chaLimit += 2
           this.chaMod = this.determineModifiers(statCheck)
+          this.chaLimit += 2
+        } else if (statCheck < 20) {
+          this.cha = statCheck
+          this.chaMod = this.determineModifiers(statCheck)
+        } else {
+          console.error("Invalid values")
         }
-      } else if (statCheck < 20 && is_magic_enhanced) {
-        this.cha = statCheck
-        this.chaMod = this.determineModifiers(statCheck)
-        this.chaLimit += 2
-      } else if (statCheck < 20) {
-        this.cha = statCheck
-        this.chaMod = this.determineModifiers(statCheck)
-      } else {
-        console.error("Invalid values")
-      }
+        break
       default:
         console.error("invalid stat option")
+        break
     }
   }
 }

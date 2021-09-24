@@ -1,4 +1,4 @@
-class die {
+export class die {
   min: number
   max: number
   RollDie() {
